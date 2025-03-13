@@ -1,0 +1,167 @@
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+html {
+  font-family: "Poppins", sans-serif;
+  background-color: #3a3a3a; /* changed from #2c2c2c */
+  line-height: 1.6;
+  color: #fff; /* changed from #ddd */
+  padding: 20px;
+}
+
+/* Main container for the application */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  background: #4a4a4a; /* changed from #3a3a3a */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px; /* changed from 500px */
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #fff; /* brighter header text */
+}
+
+/* Modern styling for the search form */
+#form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#form input[type="text"] {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+#form input[type="text"]:focus {
+  border-color: #737679;
+}
+
+#form button {
+  padding: 10px 15px;
+  font-size: 1em;
+  border: 1px solid grey;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  background-color: grey;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#form button:hover {
+  background-color: black;
+}
+
+/* Results list styling */
+.results {
+  list-style: none;
+}
+
+.results li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start; /* changed from center */
+  margin-top: 20px;
+}
+
+/* Hide show cards that don't have images */
+.show-card:not(:has(img)) {
+  display: none;
+}
+
+/* Updated styling for show card */
+.show-card {
+  text-align: center;
+  flex: 0 0 49%; /* default to 50% width */
+  box-sizing: border-box;
+  padding: 10px;
+  background: #555; /* changed from #444 */
+  border: 1px solid #666; /* changed from #555 */
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #eee; /* light text */
+}
+
+.show-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.show-card h2 {
+  font-size: 1.2em;
+  margin: 5px 0;
+}
+
+.show-card p {
+  font-size: 0.9em;
+  color: #ccc; /* changed from #666 */
+}
+
+.show-card .show-details {
+  padding: 10px;
+  text-align: left;
+  background: #444; /* changed from #333 */
+  border-top: 1px solid #666; /* changed from #555 */
+  transition: background 0.3s ease;
+  color: #ddd; /* changed from #ccc */
+}
+
+/* Responsive adjustments for mobile layout */
+@media (max-width: 600px) {
+  .show-card {
+    flex: 0 0 100%;
+  }
+}
+
+.results-container img {
+  width: 100%;
+  max-width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  min-height: 300px; /* enforce a consistent height */
+  background-color: #f7f7f7; /* add a placeholder background */
+  object-fit: cover; /* maintain aspect ratio */
+}
+
+.results-container img:hover {
+  transform: scale(1.05);
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #ccc; /* changed from #666 */
+}
