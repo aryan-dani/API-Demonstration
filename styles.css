@@ -21,11 +21,7 @@ html {
   align-items: stretch;
   width: 100%;
   margin: 0 auto;
-  background: linear-gradient(
-    135deg,
-    #2c003e,
-    #4b0a6b
-  ); /* seductive purple gradient */
+  background: linear-gradient(135deg, #2c003e, #4b0a6b); /* seductive purple gradient */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
@@ -135,18 +131,11 @@ header h1 {
   border-bottom: 1px solid #ff2a68;
 }
 
+/* Update grid layout for the results container */
 .results-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 15px;
   margin-top: 20px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .results-container {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* Hide show cards that don't have images */
@@ -157,7 +146,7 @@ header h1 {
 /* Updated styling for show card */
 .show-card {
   text-align: center;
-  width: 100%;
+  width: 100%; /* ensure full width */
   padding: 15px;
   background: #1a001d;
   border: 1px solid #ff2a68;
@@ -165,6 +154,7 @@ header h1 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: #fff;
+  margin: 0 auto;
 }
 
 .show-card:hover {
@@ -192,23 +182,22 @@ header h1 {
   color: #fff;
 }
 
-/* Responsive adjustments for mobile layout */
-@media (max-width: 600px) {
-  .show-card {
-    flex: 0 0 100%;
-  }
-}
-
+/* Image styling in results container */
 .results-container img {
   width: 100%;
   max-width: 200px;
   border: 2px solid #ff2a68;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.5s ease-in;
   min-height: 300px;
   background-color: #1a001d;
   object-fit: cover;
+  opacity: 0;
+}
+
+.results-container img.loaded {
+  opacity: 1;
 }
 
 .results-container img:hover {
@@ -221,7 +210,7 @@ footer {
   margin-top: 20px;
   font-size: 0.9em;
   color: #ff2a68;
-  text-shadow: 0 0 5px #ff2a68;
+  text-shadow: 0 0 5px #ff2a88;
 }
 
 /* New styles for tab navigation */
@@ -260,18 +249,6 @@ footer {
   margin-bottom: 20px;
 }
 
-/* Responsive adjustments for wider screens */
-@media (min-width: 800px) {
-  .container {
-    display: block;
-  }
-  #tv-search,
-  #dad-jokes {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-}
-
 /* New styles for Favorites section and Add to Favorites button */
 #favorites {
   display: none;
@@ -281,21 +258,118 @@ footer {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
 .fav-card {
   background: #2c003e;
   padding: 10px;
   margin: 10px 0;
   border-radius: 5px;
 }
+
 .add-favorite {
-  margin-top: 10px;
-  padding: 5px 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  padding: 10px 15px;
   background-color: #ff2a68;
-  border: none;
-  border-radius: 5px;
+  border: 2px solid #ff2a68;
+  border-radius: 10px;
+  color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 10px 0;
 }
+
 .add-favorite:hover {
   background-color: #ff5a8e;
+  transform: scale(1.05);
+}
+
+/* New styles for Easter Egg section */
+#easter-egg {
+  display: none;
+  width: 100%;
+  padding: 20px;
+  background-color: #1a001d;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* New styles for loading spinner */
+.spinner {
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #ff2a68;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Media Queries */
+
+/* Mobile */
+@media (max-width: 600px) {
+  .results-container {
+    grid-template-columns: 1fr;
+  }
+  .container {
+    padding: 5px !important;
+  }
+  header h1 {
+    font-size: 1.5em !important;
+  }
+  #form input[type="text"],
+  #form button {
+    padding: 6px !important;
+    font-size: 0.8em !important;
+  }
+  .show-card {
+    width: 100% !important;
+    margin: 10px 0 !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+  }
+  .tabs button {
+    padding: 8px 15px !important;
+    font-size: 0.8em !important;
+  }
+  #joke-btn {
+    padding: 8px 15px !important;
+    font-size: 0.8em !important;
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .results-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .container,
+  #tv-search,
+  #dad-jokes,
+  #favorites,
+  #easter-egg {
+    padding: 15px;
+    margin: 10px;
+  }
+  .show-card {
+    max-width: 100%;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .results-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }

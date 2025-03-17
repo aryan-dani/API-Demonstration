@@ -42,6 +42,14 @@ const addFavorite = (show) => {
   }
 };
 
+// Create spinner element function
+const createSpinner = () => {
+  const spinner = document.createElement("div");
+  spinner.classList.add("spinner");
+  return spinner;
+};
+
+// Modify displayImages to add alt text and fade effect on images
 const displayImages = (shows) => {
   const container = document.querySelector(".results-container");
   container.innerHTML = ""; // Clear previous results
@@ -49,9 +57,12 @@ const displayImages = (shows) => {
     shows.forEach(({ show }) => {
       const card = document.createElement("div");
       card.classList.add("show-card");
+
       if (show.image) {
         const img = document.createElement("img");
         img.src = show.image.medium;
+        img.alt = `${show.name} poster`;
+        img.addEventListener("load", () => img.classList.add("loaded"));
         card.appendChild(img);
       }
       const title = document.createElement("h2");
@@ -137,6 +148,9 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  const container = document.querySelector(".results-container");
+  container.innerHTML = "";
+  container.appendChild(createSpinner());
   const shows = await fetchShows(query);
   if (shows) {
     displayImages(shows);
@@ -148,45 +162,77 @@ form.addEventListener("submit", async (e) => {
 const tabTv = document.getElementById("tab-tv");
 const tabDad = document.getElementById("tab-dad");
 const tabFav = document.getElementById("tab-fav");
+const tabEaster = document.getElementById("tab-easter"); // new tab
 const tvSection = document.getElementById("tv-search");
 const dadSection = document.getElementById("dad-jokes");
 const favoritesSection = document.getElementById("favorites");
+const easterSection = document.getElementById("easter-egg"); // new section
 
-// Initialize: show TV search, hide Dad Jokes
+// Initialize: show TV search, hide others
 tvSection.style.display = "block";
 dadSection.style.display = "none";
 favoritesSection.style.display = "none";
+easterSection.style.display = "none";
 
 tabTv.addEventListener("click", () => {
   // Toggle active state
   tabTv.classList.add("active");
   tabDad.classList.remove("active");
   tabFav.classList.remove("active");
-  // Show tv section, hide dad jokes
+  tabEaster.classList.remove("active");
+  // Show tv section, hide others
   tvSection.style.display = "block";
   dadSection.style.display = "none";
   favoritesSection.style.display = "none";
+  easterSection.style.display = "none";
 });
 
 tabDad.addEventListener("click", () => {
-  // Toggle active state
   tabDad.classList.add("active");
   tabTv.classList.remove("active");
   tabFav.classList.remove("active");
-  // Show dad jokes, hide tv section
+  tabEaster.classList.remove("active");
   dadSection.style.display = "block";
   tvSection.style.display = "none";
   favoritesSection.style.display = "none";
+  easterSection.style.display = "none";
 });
 
 tabFav.addEventListener("click", () => {
   tabFav.classList.add("active");
   tabTv.classList.remove("active");
   tabDad.classList.remove("active");
+  tabEaster.classList.remove("active");
   favoritesSection.style.display = "block";
   tvSection.style.display = "none";
   dadSection.style.display = "none";
+  easterSection.style.display = "none";
   displayFavorites();
+});
+
+// Add a constant for the dark joke password and a flag for authentication
+const darkJokePassword = "pervezmusharraf";
+let darkJokeAuthenticated = false;
+
+// Modify tab switching functionality for Easter Egg tab with authentication
+tabEaster.addEventListener("click", () => {
+  // Check if already authenticated
+  if (!darkJokeAuthenticated) {
+    const userPass = prompt("Enter password to view dark jokes:");
+    if (userPass !== darkJokePassword) {
+      alert("Incorrect password. You are not authorized to view dark jokes.");
+      return;
+    }
+    darkJokeAuthenticated = true;
+  }
+  tabEaster.classList.add("active");
+  tabTv.classList.remove("active");
+  tabDad.classList.remove("active");
+  tabFav.classList.remove("active");
+  easterSection.style.display = "block";
+  tvSection.style.display = "none";
+  dadSection.style.display = "none";
+  favoritesSection.style.display = "none";
 });
 
 // Dad jokes functionality
@@ -206,7 +252,38 @@ const fetchDadJoke = async () => {
 };
 
 jokeBtn.addEventListener("click", async () => {
-  jokeText.textContent = "Loading...";
+  jokeText.innerHTML = "";
+  const spinner = createSpinner();
+  jokeText.parentNode.insertBefore(spinner, jokeText);
   const joke = await fetchDadJoke();
+  spinner.remove();
   jokeText.textContent = joke;
+});
+
+// Easter Egg: fetch dark joke
+const easterBtn = document.getElementById("easter-btn");
+const easterText = document.getElementById("easter-text");
+const fetchDarkJoke = async () => {
+  try {
+    const response = await axios.get("https://v2.jokeapi.dev/joke/Dark");
+    const data = response.data;
+    // Handle both single and two-part jokes
+    if (data.type === "single") {
+      return data.joke;
+    } else {
+      return `${data.setup} ... ${data.delivery}`;
+    }
+  } catch (error) {
+    console.error("Error fetching dark joke:", error);
+    return "Failed to retrieve a dark joke.";
+  }
+};
+
+easterBtn.addEventListener("click", async () => {
+  easterText.innerHTML = "";
+  const spinner = createSpinner();
+  easterText.parentNode.insertBefore(spinner, easterText);
+  const joke = await fetchDarkJoke();
+  spinner.remove();
+  easterText.textContent = joke;
 });
