@@ -8,9 +8,9 @@
 /* Body styles */
 html {
   font-family: "Poppins", sans-serif;
-  background-color: #3a3a3a; /* changed from #2c2c2c */
+  background: linear-gradient(135deg, #000, #1a1a1a);
   line-height: 1.6;
-  color: #fff; /* changed from #ddd */
+  color: #fff;
   padding: 20px;
 }
 
@@ -18,23 +18,30 @@ html {
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  width: 100%;
   margin: 0 auto;
-  background: #4a4a4a; /* changed from #3a3a3a */
+  background: linear-gradient(
+    135deg,
+    #2c003e,
+    #4b0a6b
+  ); /* seductive purple gradient */
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+/* Header styling */
 header {
   text-align: center;
-  margin-bottom: 20px; /* changed from 500px */
+  margin-bottom: 20px;
 }
 
 header h1 {
-  font-size: 2.5em;
+  font-size: 3em;
   margin-bottom: 10px;
-  color: #fff; /* brighter header text */
+  color: #ff2a68; /* hot pink accent */
+  text-shadow: 0 0 10px #ff2a68;
 }
 
 /* Modern styling for the search form */
@@ -46,32 +53,76 @@ header h1 {
 
 #form input[type="text"] {
   flex: 1;
-  padding: 10px 15px;
+  padding: 12px 20px;
   font-size: 1em;
-  border: 2px solid #ccc;
-  border-radius: 5px 0 0 5px;
+  border: 2px solid #ff2a68;
+  border-right: none;
+  border-radius: 10px 0 0 10px;
   outline: none;
   transition: border-color 0.3s ease;
+  background-color: #1a001d;
+  color: #fff;
 }
 
 #form input[type="text"]:focus {
-  border-color: #737679;
+  border-color: #ff5a8e;
 }
 
 #form button {
-  padding: 10px 15px;
+  padding: 12px 20px;
   font-size: 1em;
-  border: 1px solid grey;
+  border: 2px solid #ff2a68;
   border-left: none;
-  border-radius: 0 5px 5px 0;
-  background-color: grey;
+  border-radius: 0 10px 10px 0;
+  background-color: #ff2a68;
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #form button:hover {
-  background-color: black;
+  background-color: #ff5a8e;
+  transform: scale(1.05);
+}
+
+/* Updated button styles with vibrant sexy hues */
+#form button,
+.tabs button {
+  font-family: "Poppins", sans-serif;
+  background-color: #ff2a68;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#form button:hover,
+.tabs button:hover {
+  background-color: #ff5a8e;
+  transform: scale(1.05);
+}
+
+.tabs button.active {
+  background-color: #e6005c;
+}
+
+/* New styling for Dad Jokes button */
+#joke-btn {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  font-family: "Poppins", sans-serif;
+  background-color: #ff2a68;
+  border: 2px solid #ff2a68;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#joke-btn:hover {
+  background-color: #ff5a8e;
+  transform: scale(1.05);
 }
 
 /* Results list styling */
@@ -81,15 +132,21 @@ header h1 {
 
 .results li {
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ff2a68;
 }
 
 .results-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start; /* changed from center */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
   margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .results-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Hide show cards that don't have images */
@@ -100,39 +157,39 @@ header h1 {
 /* Updated styling for show card */
 .show-card {
   text-align: center;
-  flex: 0 0 49%; /* default to 50% width */
-  box-sizing: border-box;
-  padding: 10px;
-  background: #555; /* changed from #444 */
-  border: 1px solid #666; /* changed from #555 */
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 15px;
+  background: #1a001d;
+  border: 1px solid #ff2a68;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: #eee; /* light text */
+  color: #fff;
 }
 
 .show-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
 }
 
 .show-card h2 {
-  font-size: 1.2em;
-  margin: 5px 0;
+  font-size: 1.4em;
+  margin: 10px 0;
+  color: #ff5a8e;
 }
 
 .show-card p {
-  font-size: 0.9em;
-  color: #ccc; /* changed from #666 */
+  font-size: 1em;
+  color: #d1d1d1;
 }
 
 .show-card .show-details {
   padding: 10px;
   text-align: left;
-  background: #444; /* changed from #333 */
-  border-top: 1px solid #666; /* changed from #555 */
+  background: #330033;
+  border-top: 1px solid #ff2a68;
   transition: background 0.3s ease;
-  color: #ddd; /* changed from #ccc */
+  color: #fff;
 }
 
 /* Responsive adjustments for mobile layout */
@@ -145,17 +202,17 @@ header h1 {
 .results-container img {
   width: 100%;
   max-width: 200px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ff2a68;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   transition: transform 0.3s ease;
-  min-height: 300px; /* enforce a consistent height */
-  background-color: #f7f7f7; /* add a placeholder background */
-  object-fit: cover; /* maintain aspect ratio */
+  min-height: 300px;
+  background-color: #1a001d;
+  object-fit: cover;
 }
 
 .results-container img:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 /* Footer styling */
@@ -163,5 +220,82 @@ footer {
   text-align: center;
   margin-top: 20px;
   font-size: 0.9em;
-  color: #ccc; /* changed from #666 */
+  color: #ff2a68;
+  text-shadow: 0 0 5px #ff2a68;
+}
+
+/* New styles for tab navigation */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  padding: 12px 25px;
+  background-color: #330033;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tabs button.active {
+  background-color: #550055;
+}
+
+.tabs button:hover {
+  background-color: #660066;
+}
+
+/* Style sections for TV Search and Dad Jokes */
+#tv-search,
+#dad-jokes {
+  width: 100%;
+  padding: 20px;
+  background-color: #1a001d;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Responsive adjustments for wider screens */
+@media (min-width: 800px) {
+  .container {
+    display: block;
+  }
+  #tv-search,
+  #dad-jokes {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* New styles for Favorites section and Add to Favorites button */
+#favorites {
+  display: none;
+  width: 100%;
+  padding: 20px;
+  background-color: #1a001d;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.fav-card {
+  background: #2c003e;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+.add-favorite {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #ff2a68;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.add-favorite:hover {
+  background-color: #ff5a8e;
 }
