@@ -218,9 +218,9 @@ let darkJokeAuthenticated = false;
 tabEaster.addEventListener("click", () => {
   // Check if already authenticated
   if (!darkJokeAuthenticated) {
-    const userPass = prompt("Enter password to view dark jokes:");
+    const userPass = prompt("Enter password to view the easter egg:");
     if (userPass !== darkJokePassword) {
-      alert("Incorrect password. You are not authorized to view dark jokes.");
+      alert("Incorrect password. You are not authorized to view the easter.");
       return;
     }
     darkJokeAuthenticated = true;
