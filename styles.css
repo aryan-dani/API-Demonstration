@@ -21,7 +21,11 @@ html {
   align-items: stretch;
   width: 100%;
   margin: 0 auto;
-  background: linear-gradient(135deg, #2c003e, #4b0a6b); /* seductive purple gradient */
+  background: linear-gradient(
+    135deg,
+    #2c003e,
+    #4b0a6b
+  ); /* seductive purple gradient */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
